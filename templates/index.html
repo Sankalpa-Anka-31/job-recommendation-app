@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Job Recommendation System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        // This function will show the spinner when the form is submitted
+        function showLoading() {
+            document.getElementById("loading-spinner").style.display = "block";
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Find Your Best Job Matches</h1>
+        <form action="/recommend" method="post" onsubmit="showLoading()">
+            <label for="skills">Skills (comma-separated):</label><br>
+            <input type="text" id="skills" name="skills" placeholder="e.g. Python, Git, SQL" required><br><br>
+
+            <label for="top_n">Number of Job Recommendations:</label><br>
+            <select id="top_n" name="top_n" required>
+                <option value="3">Top 3</option>
+                <option value="5">Top 5</option>
+                <option value="10">Top 10</option>
+            </select><br><br>
+
+            <label for="job_title">Job Title Filter (Optional):</label><br>
+            <input type="text" id="job_title" name="job_title" placeholder="e.g. Engineer, Analyst"><br><br>
+
+            <input type="submit" value="Get Recommendations">
+        </form>
+
+        <!-- Spinner that will show while loading -->
+        <div id="loading-spinner" style="display: none; text-align: center; margin-top: 20px;">
+            <img src="{{ url_for('static', filename='spinner.gif') }}" alt="Loading...">
+        </div>
+    </div>
+</body>
+</html>
